@@ -53,5 +53,11 @@ public class CircularListImplementation implements CircularList{
     public void reset() {
         this.currentIndex = 0;
     }
+
+    @Override
+    public String toString() {
+        return "CircularListImplementation [circularList=" + circularList + ", currentIndex=" + currentIndex + "]";
+    }
+    
     
 }
