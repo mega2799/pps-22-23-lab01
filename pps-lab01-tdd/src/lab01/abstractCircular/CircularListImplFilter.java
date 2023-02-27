@@ -2,19 +2,22 @@ package lab01.abstractCircular;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 import lab01.tdd.CircularListImplementation;
 
-public abstract class CircularListImpl{
+public abstract class CircularListImplFilter{
 
     private final List<Integer> circularList;
     private int bruh = 0;
 
     private final static boolean DEBUG = false;
     
-    public CircularListImpl(){
+    public CircularListImplFilter(){
         this.circularList = new ArrayList<>();
     }
 
@@ -35,14 +38,16 @@ public abstract class CircularListImpl{
         return new ForwardIterator<>(this.circularList);
   }
 
-  public Iterator<Integer> backwardIterator() {
-      return new BackwardIterator<>(this.circularList);
+  public Iterator<Optional<Integer>> backwardIterator() {
+      return new BackwardIterator<>(this.circularList, (element) -> ((Integer) element > 20));
   }
 
     private class BackwardIterator<Integer> implements Iterator{
         private final CircularListImplementation circularListImplementation = new CircularListImplementation();
+        private final Predicate<Integer> filter;
 
-        public BackwardIterator(List<Integer> listOfIntegers) {
+        public BackwardIterator(List<Integer> listOfIntegers, Predicate<Integer> filter) {
+            this.filter = filter;
             listOfIntegers.forEach((element) -> {
                 this.circularListImplementation.add((int) element);
             });
@@ -55,8 +60,12 @@ public abstract class CircularListImpl{
         }
 
         @Override
-        public Integer next() {
-            return (Integer) this.circularListImplementation.previous().get();
+        public Optional<Integer> next() {
+            Integer elementToTest = (Integer) this.circularListImplementation.previous().get();
+            //System.out.println(filter.test(elementToTest));
+            //System.out.println(elementToTest);
+            if(filter.test(elementToTest)) return Optional.of(elementToTest);
+            return Optional.empty();
         }
 
     }
