@@ -7,7 +7,7 @@ import java.util.Optional;
 public class CircularListImplementation implements CircularList{
 
     private final List<Integer> circularList;
-    private int bruh = 0;
+    private int currentIndex = 0;
 
     private final static boolean DEBUG = false;
     
@@ -18,7 +18,7 @@ public class CircularListImplementation implements CircularList{
     @Override
     public void add(int element) {
         this.circularList.add(element);
-        if(DEBUG) System.out.print(String.format("\ncurrent: %d, list %s", this.bruh,this.circularList.toString()));
+        if(DEBUG) System.out.print(String.format("\ncurrent: %d, list %s", this.currentIndex,this.circularList.toString()));
     }
 
     @Override
@@ -34,24 +34,24 @@ public class CircularListImplementation implements CircularList{
     @Override
     public Optional<Integer> next() {
         if(this.circularList.size() == 0) return Optional.empty();
-        if(bruh >= this.circularList.size()) this.reset();
-        return Optional.of(this.circularList.get(bruh++));
+        if(currentIndex >= this.circularList.size()) this.reset();
+        return Optional.of(this.circularList.get(currentIndex++));
     }
 
     @Override
     public Optional<Integer> previous() {
         if(this.circularList.size() == 0) return Optional.empty();
-        if(bruh < 0) this.maxReset();
-        return Optional.of(this.circularList.get(bruh--));
+        if(currentIndex < 0) this.maxReset();
+        return Optional.of(this.circularList.get(currentIndex--));
     }
 
     private void maxReset() {
-        this.bruh = this.circularList.size() - 1;
+        this.currentIndex = this.circularList.size() - 1;
     }
 
     @Override
     public void reset() {
-        this.bruh = 0;
+        this.currentIndex = 0;
     }
     
 }
