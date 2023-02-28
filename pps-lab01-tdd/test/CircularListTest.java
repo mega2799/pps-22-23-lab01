@@ -79,6 +79,14 @@ public class CircularListTest {
         assertEquals(Optional.of(99), this.cl.previous());
     }
 
+
+    @Test
+    public void testCircularity() {
+        this.cl.add(23);
+        IntStream.range(0, 200)
+        .forEach((element) -> assertEquals(Optional.of(23), this.cl.next()));
+    }
+
     @Test
     public void resetTest() {
         this.nextTest();
