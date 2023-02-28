@@ -3,10 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import lab01.tdd.CircularList;
@@ -80,6 +77,14 @@ public class CircularListTest {
         assertEquals(Optional.of(99), this.cl.previous());
         assertEquals(Optional.of(23), this.cl.previous());
         assertEquals(Optional.of(99), this.cl.previous());
+    }
+
+
+    @Test
+    public void testCircularity() {
+        this.cl.add(23);
+        IntStream.range(0, 200)
+        .forEach((element) -> assertEquals(Optional.of(23), this.cl.next()));
     }
 
     @Test

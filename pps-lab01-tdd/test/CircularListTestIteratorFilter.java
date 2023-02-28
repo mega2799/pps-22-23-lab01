@@ -1,18 +1,12 @@
-import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import lab01.simpleIterator.CircularListItarableFilter;
+import lab01.filteredIterator.CircularListItarableFilter;
 
 /**
  * The test suite for testing the CircularList implementation
@@ -44,16 +38,20 @@ public class CircularListTestIteratorFilter {
     }
 
     @Test 
-    public void backwardIterator(){
+    public void filteredIterator(){
         this.cl.add(90);
         this.cl.add(91);
         this.cl.add(1);
         this.cl.add(92);
         Iterator<Optional<Integer>> circolarIterator = this.cl.filteredNext((element) -> ((Integer) element > 20));
-        assertEquals(90, circolarIterator.next().get());
-        assertEquals(92, circolarIterator.next().get());
+        assertEquals(Optional.of(90), circolarIterator.next());
+        assertEquals(Optional.of(92), circolarIterator.next());
         assertEquals(Optional.empty(), circolarIterator.next());
-        assertEquals(91, circolarIterator.next().get());
-        assertEquals(90, circolarIterator.next().get());
+        assertEquals(Optional.of(91), circolarIterator.next());
+        //again
+        assertEquals(Optional.of(90), circolarIterator.next());
+        assertEquals(Optional.of(92), circolarIterator.next());
+        assertEquals(Optional.empty(), circolarIterator.next());
+        assertEquals(Optional.of(91), circolarIterator.next());
     }
 }
