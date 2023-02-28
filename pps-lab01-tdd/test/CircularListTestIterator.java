@@ -33,11 +33,6 @@ public class CircularListTestIterator {
         this.cl = new CircularListItarableSimple();
     }
 
-    @Disabled
-    @Test public void testTodo(){
-        Assertions.fail();
-    }
-
     @Test
     public void addTest() {
         this.cl.add(23);

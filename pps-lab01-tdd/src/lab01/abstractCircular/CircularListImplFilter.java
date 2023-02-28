@@ -34,19 +34,19 @@ public abstract class CircularListImplFilter{
         return this.circularList.size() == 0;
     }
 
-   public Iterator<Integer> forwardIterator(){
-        return new ForwardIterator<>(this.circularList);
+  /**
+   * filtered elements goes backward in a list with a specific Predicate
+   * @return Iterator<Optional<Integer>>
+   */
+  public Iterator<Optional<Integer>> filteredNext(Predicate predicate) {
+      return new FilteredIteretor<>(this.circularList, predicate);
   }
 
-  public Iterator<Optional<Integer>> backwardIterator() {
-      return new BackwardIterator<>(this.circularList, (element) -> ((Integer) element > 20));
-  }
-
-    private class BackwardIterator<Integer> implements Iterator{
+    private class FilteredIteretor<Integer> implements Iterator{
         private final CircularListImplementation circularListImplementation = new CircularListImplementation();
         private final Predicate<Integer> filter;
 
-        public BackwardIterator(List<Integer> listOfIntegers, Predicate<Integer> filter) {
+        public FilteredIteretor(List<Integer> listOfIntegers, Predicate<Integer> filter) {
             this.filter = filter;
             listOfIntegers.forEach((element) -> {
                 this.circularListImplementation.add((int) element);
@@ -62,33 +62,9 @@ public abstract class CircularListImplFilter{
         @Override
         public Optional<Integer> next() {
             Integer elementToTest = (Integer) this.circularListImplementation.previous().get();
-            //System.out.println(filter.test(elementToTest));
-            //System.out.println(elementToTest);
             if(filter.test(elementToTest)) return Optional.of(elementToTest);
             return Optional.empty();
         }
 
     }
-    private class ForwardIterator<Integer> implements Iterator{
-        private final CircularListImplementation circularListImplementation = new CircularListImplementation();
-
-        public ForwardIterator(List<Integer> listOfIntegers) {
-            listOfIntegers.forEach((element) -> {
-                this.circularListImplementation.add((int) element);
-            });
-            //System.out.println(this.circularListImplementation.toString());
-        }
-
-        @Override
-        public boolean hasNext() {
-            return true;
-        }
-
-        @Override
-        public Integer next() {
-            return (Integer) this.circularListImplementation.next().get();
-        }
-
-    }
-
 }

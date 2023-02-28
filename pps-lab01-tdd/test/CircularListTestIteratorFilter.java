@@ -25,11 +25,6 @@ public class CircularListTestIteratorFilter {
         this.cl = new CircularListItarableFilter();
     }
 
-    @Disabled
-    @Test public void testTodo(){
-        Assertions.fail();
-    }
-
     @Test
     public void addTest() {
         this.cl.add(23);
@@ -49,26 +44,12 @@ public class CircularListTestIteratorFilter {
     }
 
     @Test 
-    public void forwardIterator(){
-        this.cl.add(90);
-        this.cl.add(91);
-        Iterator<Integer> simpleIterator = Arrays.asList(90, 91).iterator();
-        Iterator<Integer> circolarIterator = this.cl.forwardIterator();
-     //   Iterator<Integer> simpleIterator2 = Arrays.asList(90, 91).iterator();
-        assertEquals(simpleIterator.next(), circolarIterator.next());
-        assertEquals(simpleIterator.next(), circolarIterator.next());
-        assertEquals(90, circolarIterator.next());
-        assertEquals(91, circolarIterator.next());
-    }
-    
-
-    @Test 
     public void backwardIterator(){
         this.cl.add(90);
         this.cl.add(91);
         this.cl.add(1);
         this.cl.add(92);
-        Iterator<Optional<Integer>> circolarIterator = this.cl.backwardIterator();
+        Iterator<Optional<Integer>> circolarIterator = this.cl.filteredNext((element) -> ((Integer) element > 20));
         assertEquals(90, circolarIterator.next().get());
         assertEquals(92, circolarIterator.next().get());
         assertEquals(Optional.empty(), circolarIterator.next());
