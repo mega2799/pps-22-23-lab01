@@ -23,11 +23,6 @@ public class CircularListTest {
         this.cl = new CircularListImplementation();
     }
 
-    @Disabled
-    @Test public void testTodo(){
-        Assertions.fail();
-    }
-
     @Test
     public void addTest() {
         this.cl.add(23);
