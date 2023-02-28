@@ -1,8 +1,7 @@
-package lab01.abstractCircular;
+package lab01.abstractCircularList;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -38,11 +37,11 @@ public abstract class CircularListImplFilter{
    * filtered elements goes backward in a list with a specific Predicate
    * @return Iterator<Optional<Integer>>
    */
-  public Iterator<Optional<Integer>> filteredNext(Predicate predicate) {
+  public Iterator<Optional<Integer>> filteredNext(Predicate<Integer> predicate) {
       return new FilteredIteretor<>(this.circularList, predicate);
   }
 
-    private class FilteredIteretor<Integer> implements Iterator{
+    private class FilteredIteretor<Integer> implements Iterator<Optional<Integer>>{
         private final CircularListImplementation circularListImplementation = new CircularListImplementation();
         private final Predicate<Integer> filter;
 
@@ -51,7 +50,7 @@ public abstract class CircularListImplFilter{
             listOfIntegers.forEach((element) -> {
                 this.circularListImplementation.add((int) element);
             });
-            //System.out.println(this.circularListImplementation.toString());
+            if(DEBUG) System.out.println(this.circularListImplementation.toString());
         }
 
         @Override
@@ -59,11 +58,11 @@ public abstract class CircularListImplFilter{
             return true;
         }
 
+        @SuppressWarnings (value="unchecked")
         @Override
         public Optional<Integer> next() {
             Integer elementToTest = (Integer) this.circularListImplementation.previous().get();
-            if(filter.test(elementToTest)) return Optional.of(elementToTest);
-            return Optional.empty();
+            return Optional.ofNullable(filter.test(elementToTest) ? elementToTest : null);
         }
 
     }

@@ -1,8 +1,6 @@
 package lab01.simpleIterator;
 
-import java.util.Optional;
-
-import lab01.abstractCircular.CircularListImpl;
+import lab01.abstractCircularList.CircularListImpl;
 
 public class CircularListItarableSimple extends CircularListImpl{
 

@@ -1,4 +1,4 @@
-package lab01.abstractCircular;
+package lab01.abstractCircularList;
 
 
 import java.util.ArrayList;
@@ -39,14 +39,14 @@ public abstract class CircularListImpl{
       return new BackwardIterator<>(this.circularList);
   }
 
-    private class BackwardIterator<Integer> implements Iterator{
+    private class BackwardIterator<Integer> implements Iterator<Integer>{
         private final CircularListImplementation circularListImplementation = new CircularListImplementation();
 
         public BackwardIterator(List<Integer> listOfIntegers) {
             listOfIntegers.forEach((element) -> {
                 this.circularListImplementation.add((int) element);
             });
-            //System.out.println(this.circularListImplementation.toString());
+            if(DEBUG) System.out.println(this.circularListImplementation.toString());
         }
 
         @Override
@@ -54,20 +54,22 @@ public abstract class CircularListImpl{
             return true;
         }
 
+        @SuppressWarnings (value="unchecked")
         @Override
         public Integer next() {
-            return (Integer) this.circularListImplementation.previous().get();
+            return  (Integer) this.circularListImplementation.previous().get();
         }
 
     }
-    private class ForwardIterator<Integer> implements Iterator{
+
+    private class ForwardIterator<Integer> implements Iterator<Integer>{
         private final CircularListImplementation circularListImplementation = new CircularListImplementation();
 
         public ForwardIterator(List<Integer> listOfIntegers) {
             listOfIntegers.forEach((element) -> {
                 this.circularListImplementation.add((int) element);
             });
-            //System.out.println(this.circularListImplementation.toString());
+            if(DEBUG) System.out.println(this.circularListImplementation.toString());
         }
 
         @Override
@@ -75,6 +77,7 @@ public abstract class CircularListImpl{
             return true;
         }
 
+        @SuppressWarnings (value="unchecked")
         @Override
         public Integer next() {
             return (Integer) this.circularListImplementation.next().get();

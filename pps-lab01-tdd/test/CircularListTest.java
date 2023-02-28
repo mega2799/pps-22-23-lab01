@@ -3,10 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import lab01.tdd.CircularList;

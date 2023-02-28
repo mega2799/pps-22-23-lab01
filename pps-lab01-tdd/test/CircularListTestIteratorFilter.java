@@ -1,18 +1,12 @@
-import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import lab01.simpleIterator.CircularListItarableFilter;
+import lab01.filteredIterator.CircularListItarableFilter;
 
 /**
  * The test suite for testing the CircularList implementation
