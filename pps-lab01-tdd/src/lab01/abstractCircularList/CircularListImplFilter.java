@@ -61,7 +61,7 @@ public abstract class CircularListImplFilter{
         @SuppressWarnings (value="unchecked")
         @Override
         public Optional<Integer> next() {
-            Integer elementToTest = (Integer) this.circularListImplementation.previous().get();
+            Integer elementToTest = (Integer) this.circularListImplementation.next().get();
             return Optional.ofNullable(filter.test(elementToTest) ? elementToTest : null);
         }
 

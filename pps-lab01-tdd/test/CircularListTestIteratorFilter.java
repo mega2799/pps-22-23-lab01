@@ -45,13 +45,13 @@ public class CircularListTestIteratorFilter {
         this.cl.add(92);
         Iterator<Optional<Integer>> circolarIterator = this.cl.filteredNext((element) -> ((Integer) element > 20));
         assertEquals(Optional.of(90), circolarIterator.next());
-        assertEquals(Optional.of(92), circolarIterator.next());
-        assertEquals(Optional.empty(), circolarIterator.next());
         assertEquals(Optional.of(91), circolarIterator.next());
+        assertEquals(Optional.empty(), circolarIterator.next());
+        assertEquals(Optional.of(92), circolarIterator.next());
         //again
         assertEquals(Optional.of(90), circolarIterator.next());
-        assertEquals(Optional.of(92), circolarIterator.next());
-        assertEquals(Optional.empty(), circolarIterator.next());
         assertEquals(Optional.of(91), circolarIterator.next());
+        assertEquals(Optional.empty(), circolarIterator.next());
+        assertEquals(Optional.of(92), circolarIterator.next());
     }
 }
